@@ -165,4 +165,8 @@
     <string name="keybox_data_title">Select keybox XML to spoof</string>
     <string name="keybox_data_summary">Select the Keybox XML used for system-wide key attestation spoofing. Click Delete to reset the system-wide Keybox data values.</string>
 
+    <!-- Android debugging as root -->
+    <string name="adb_enable_root">Rooted debugging</string>
+    <string name="adb_enable_summary_root">Allow running Android debugging as root</string>
+
 </resources>
