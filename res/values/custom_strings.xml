@@ -6,5 +6,7 @@
     <string name="force_lte_ca">Force LTE CA</string>
     <string name="force_lte_ca_summary">Force LTE carrier aggregation to work</string>
 
+    <!-- Radio Info -->
+    <string name="radio_info_title">Radio info</string>
 
 </resources>
