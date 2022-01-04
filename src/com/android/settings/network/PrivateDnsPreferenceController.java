@@ -67,6 +67,15 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
 
     // Only used in Settings, update on additions to ConnectivitySettingsUtils
     private static final int PRIVATE_DNS_MODE_CLOUDFLARE = 4;
+    private static final int PRIVATE_DNS_MODE_CLOUDFLARE_BLOCK_MALWARE = 5;
+    private static final int PRIVATE_DNS_MODE_CLOUDFLARE_BLOCK_MALWARE_AND_ADULT_CONTENT = 6;
+    private static final int PRIVATE_DNS_MODE_ADGUARD = 7;
+    private static final int PRIVATE_DNS_MODE_OPEN_DNS = 8;
+    private static final int PRIVATE_DNS_MODE_CLEANBROWSING = 9;
+    private static final int PRIVATE_DNS_MODE_QUAD9 = 10;
+    private static final int PRIVATE_DNS_MODE_QUAD9_UNSECURED = 11;
+    private static final int PRIVATE_DNS_MODE_QUAD9_ECS = 12;
+    private static final int PRIVATE_DNS_MODE_QUAD9_UNSECURED_ECS = 13;
 
     private final Handler mHandler;
     private final ContentObserver mSettingsObserver;
@@ -133,6 +142,15 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
             case PRIVATE_DNS_MODE_OFF:
                 return res.getString(com.android.settingslib.R.string.private_dns_mode_off);
             case PRIVATE_DNS_MODE_CLOUDFLARE:
+            case PRIVATE_DNS_MODE_CLOUDFLARE_BLOCK_MALWARE:
+            case PRIVATE_DNS_MODE_CLOUDFLARE_BLOCK_MALWARE_AND_ADULT_CONTENT:
+            case PRIVATE_DNS_MODE_ADGUARD:
+            case PRIVATE_DNS_MODE_OPEN_DNS:
+            case PRIVATE_DNS_MODE_CLEANBROWSING:
+            case PRIVATE_DNS_MODE_QUAD9:
+            case PRIVATE_DNS_MODE_QUAD9_UNSECURED:
+            case PRIVATE_DNS_MODE_QUAD9_ECS:
+            case PRIVATE_DNS_MODE_QUAD9_UNSECURED_ECS:
             case PRIVATE_DNS_MODE_OPPORTUNISTIC:
                 return dnsesResolved ? res.getString(R.string.private_dns_mode_on)
                         : res.getString(
@@ -146,8 +164,34 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
                         ConnectivitySettingsManager.getPrivateDnsHostname(mContext);
                 final String cloudflareHostname =
                         res.getString(R.string.private_dns_hostname_cloudflare);
+                final String cloudflareblockmalwareHostname =
+                        res.getString(R.string.private_dns_hostname_cloudflare_block_malware);
+                final String cloudflareblockmalwaresndsdultcontentHostname =
+                        res.getString(R.string.private_dns_hostname_cloudflare_block_malware_and_adult_content);
+                final String adguardHostname =
+                        res.getString(R.string.private_dns_hostname_adguard);
+                final String opendnsHostname =
+                        res.getString(R.string.private_dns_hostname_open_dns);
+                final String cleanbrowsingHostname =
+                        res.getString(R.string.private_dns_hostname_cleanbrowsing);
+                final String quad9Hostname =
+                        res.getString(R.string.private_dns_hostname_quad9);
+                final String quad9unsecuredHostname =
+                        res.getString(R.string.private_dns_hostname_quad9_unsecured);
+                final String quad9ecsHostname =
+                        res.getString(R.string.private_dns_hostname_quad9_ecs);
+                final String quad9unsecuredecsHostname =
+                        res.getString(R.string.private_dns_hostname_quad9_unsecured_ecs);
                 if (privateDnsHostname.equals(cloudflareHostname)) {
                     return res.getString(R.string.private_dns_mode_cloudflare);
+                } else if (privateDnsHostname.equals(adguardHostname)) {
+                    return res.getString(R.string.private_dns_mode_adguard);
+                } else if (privateDnsHostname.equals(opendnsHostname)) {
+                    return res.getString(R.string.private_dns_mode_open_dns);
+                } else if (privateDnsHostname.equals(cleanbrowsingHostname)) {
+                    return res.getString(R.string.private_dns_mode_cleanbrowsing);
+                } else if (privateDnsHostname.equals(quad9Hostname)) {
+                    return res.getString(R.string.private_dns_mode_quad9);
                 }
                 return privateDnsHostname;
         }
