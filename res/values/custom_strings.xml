@@ -167,4 +167,8 @@
     <string name="icon_manager_summary">Control visibility of status bar icons</string>
 
 
+    <!-- Notifications while screen on -->
+    <string name="notification_sound_vib_screen_on_title">Screen-On Notifications</string>
+    <string name="notification_sound_vib_screen_on_summary">Allow sound and vibration alerts when the screen is on</string>
+
 </resources>
