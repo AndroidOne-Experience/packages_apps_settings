@@ -170,4 +170,8 @@
     <string name="lock_pattern_size_6" translatable="false">6 \u00d7 6</string>
     <string name="lock_settings_picker_pattern_size_message">Choose a pattern size</string>
 
+    <!-- WiFi Standard icon -->
+    <string name="wifi_standard_icon_title">WiFi standard</string>
+    <string name="wifi_standard_icon_summary">Display WiFi standard next to WiFi signal</string>
+
 </resources>

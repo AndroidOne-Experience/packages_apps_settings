@@ -240,4 +240,10 @@
             android:fragment="com.android.settings.display.VrDisplayPreferencePicker"/>
     </PreferenceCategory>
 
+        <com.android.settings.custom.preference.SystemSettingSwitchPreference
+            android:key="wifi_standard_icon"
+            android:title="@string/wifi_standard_icon_title"
+            android:summary="@string/wifi_standard_icon_summary"
+            android:defaultValue="true"/>
+
 </PreferenceScreen>
