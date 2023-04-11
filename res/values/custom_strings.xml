@@ -94,4 +94,10 @@
     <string name="battery_saver_refresh_rate_title">Reduce refresh rate</string>
     <string name="battery_saver_refresh_rate_summary">Use 60 Hz screen refresh rate to save power when Battery Saver is on</string>
 
+    <!-- Ambient wake toggles -->
+    <string name="doze_gesture_ambient_title">Show Ambient</string>
+    <string name="doze_gesture_ambient_summary">Show Ambient Display instead of fully waking the screen up</string>
+    <string name="gesture_wake_ambient">Show Ambient</string>
+    <string name="gesture_wake">Fully wake</string>
+
 </resources>
