@@ -197,6 +197,14 @@
 
     </Preference>
 
+    <Preference
+        android:order="252"
+        android:key="hide_developer_status_settings"
+        android:title="@string/hide_developer_status_title"
+        android:summary="@string/hide_developer_status_summary"
+        android:fragment="com.android.settings.security.HideDeveloperStatusSettings"
+        settings:controller="com.android.settings.security.HideDeveloperStatusPreferenceController" />
+
     <com.android.settings.security.KeyboxDataPreference
         android:order="253"
         android:key="keybox_data_setting"
