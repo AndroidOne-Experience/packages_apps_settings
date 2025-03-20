@@ -155,6 +155,17 @@
             settings:searchable="false"
             settings:controller="com.android.settings.network.telephony.NrAdvancedCallingPreferenceController"/>
 
+        <com.android.settings.custom.preference.SystemSettingSwitchPreference
+            android:key="data_disabled_icon"
+            android:title="@string/data_disabled_icon_title"
+            android:summary="@string/data_disabled_icon_summary"
+            android:defaultValue="true"/>
+
+        <com.android.settings.custom.preference.SystemSettingSwitchPreference
+            android:key="show_fourg_icon"
+            android:title="@string/show_fourg_icon_title"
+            android:summary="@string/show_fourg_icon_summary"/>
+
         <SwitchPreferenceCompat
             android:key="contact_discovery_opt_in"
             android:title="@string/contact_discovery_opt_in_title"
