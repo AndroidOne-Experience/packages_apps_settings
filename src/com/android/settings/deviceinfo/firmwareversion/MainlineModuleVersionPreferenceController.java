@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -42,13 +43,6 @@ import java.util.TimeZone;
 // LINT.IfChange
 public class MainlineModuleVersionPreferenceController extends BasePreferenceController {
 
-    @VisibleForTesting
-    static final Intent MODULE_UPDATE_INTENT =
-            new Intent("android.settings.MODULE_UPDATE_SETTINGS");
-    @VisibleForTesting
-    static final Intent MODULE_UPDATE_V2_INTENT =
-            new Intent("android.settings.MODULE_UPDATE_VERSIONS");
-
     private static final String TAG = "MainlineModuleControl";
     private static final List<String> VERSION_NAME_DATE_PATTERNS = Arrays.asList("yyyy-MM-dd",
             "yyyy-MM");
@@ -63,8 +57,6 @@ public class MainlineModuleVersionPreferenceController extends BasePreferenceCon
         if (Flags.mainlineModuleExplicitIntent()) {
             String packageName = mContext
                     .getString(com.android.settings.R.string.config_mainline_module_update_package);
-            MODULE_UPDATE_INTENT.setPackage(packageName);
-            MODULE_UPDATE_V2_INTENT.setPackage(packageName);
         }
         initModules();
     }
@@ -92,21 +84,18 @@ public class MainlineModuleVersionPreferenceController extends BasePreferenceCon
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        final ResolveInfo resolvedV2 =
-                mPackageManager.resolveActivity(MODULE_UPDATE_V2_INTENT, 0 /* flags */);
-        if (resolvedV2 != null) {
-            preference.setIntent(MODULE_UPDATE_V2_INTENT);
-            preference.setSelectable(true);
-            return;
-        }
+        // Create an intent to open the Play Store directly to update Google Play Services
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("market://details?id=com.google.android.gms")); // Play Store URL for GMS
+        intent.setPackage("com.android.vending");  // Ensures Play Store app is opened
 
-        final ResolveInfo resolved =
-                mPackageManager.resolveActivity(MODULE_UPDATE_INTENT, 0 /* flags */);
-        if (resolved != null) {
-            preference.setIntent(MODULE_UPDATE_INTENT);
+        // Check if Play Store is installed and available
+        if (intent.resolveActivity(mPackageManager) != null) {
+            preference.setIntent(intent);
             preference.setSelectable(true);
         } else {
-            Log.d(TAG, "The ResolveInfo of the update intent is null.");
+            // Handle the case where Play Store is not installed
+            Log.e(TAG, "Google Play Store is not installed.");
             preference.setIntent(null);
             preference.setSelectable(false);
         }
