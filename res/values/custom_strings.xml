@@ -161,4 +161,8 @@
     <string name="network_options_title">Options</string>
     <string name="network_traffic_autohide_title">Hide network traffic indicator if inactive</string>
 
+    <!-- Keybox Data -->
+    <string name="keybox_data_title">Select keybox XML to spoof</string>
+    <string name="keybox_data_summary">Select the Keybox XML used for system-wide key attestation spoofing. Click Delete to reset the system-wide Keybox data values.</string>
+
 </resources>
