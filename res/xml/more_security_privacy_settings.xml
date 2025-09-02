@@ -232,6 +232,13 @@
         android:fragment="com.android.settings.security.MemtagPage"
         settings:controller="com.android.settings.security.MemtagPagePreferenceController" />
 
+    <com.android.settings.security.KeyboxDataPreference
+        android:order="93"
+        android:key="keybox_data_setting"
+        android:title="@string/keybox_data_title"
+        android:summary="@string/keybox_data_summary"
+        android:defaultValue=""/>
+
     <Preference
         android:order="94"
         android:key="hide_developer_status_settings"

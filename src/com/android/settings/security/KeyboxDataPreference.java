@@ -1,4 +1,4 @@
-package com.android.settings.applications;
+package com.android.settings.security;
 
 import android.content.Context;
 import android.content.Intent;

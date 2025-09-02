@@ -16,13 +16,22 @@
 
 package com.android.settings.safetycenter;
 
+import com.android.settings.security.KeyboxDataPreference;
+
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
+import android.view.View;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -49,6 +58,11 @@ public class MoreSecurityPrivacyFragment extends DashboardFragment {
     private static final String KEY_NOTIFICATION_WORK_PROFILE_NOTIFICATIONS =
             "privacy_lock_screen_work_profile_notifications";
 
+    // Keybox preference integration
+    private static final String KEYBOX_DATA_KEY = "keybox_data_setting";
+    private ActivityResultLauncher<Intent> mKeyboxFilePickerLauncher;
+    private KeyboxDataPreference mKeyboxDataPreference;
+
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.MORE_SECURITY_PRIVACY_SETTINGS;
@@ -74,6 +88,31 @@ public class MoreSecurityPrivacyFragment extends DashboardFragment {
         super.onCreate(icicle);
         SafetyCenterUtils.replaceEnterpriseStringsForPrivacyEntries(this);
         SafetyCenterUtils.replaceEnterpriseStringsForSecurityEntries(this);
+
+        // Setup Keybox file picker
+        mKeyboxFilePickerLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                        Uri uri = result.getData().getData();
+                        Preference pref = findPreference(KEYBOX_DATA_KEY);
+                        if (pref instanceof KeyboxDataPreference) {
+                            ((KeyboxDataPreference) pref).handleFileSelected(uri);
+                        }
+                    }
+                }
+        );
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Connect Keybox preference to launcher
+        mKeyboxDataPreference = findPreference(KEYBOX_DATA_KEY);
+        if (mKeyboxDataPreference != null) {
+            mKeyboxDataPreference.setFilePickerLauncher(mKeyboxFilePickerLauncher);
+        }
     }
 
     /** see confirmPatternThenDisableAndClear */
