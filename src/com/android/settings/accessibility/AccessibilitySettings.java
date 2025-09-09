@@ -483,7 +483,6 @@ public class AccessibilitySettings extends DashboardFragment implements
             List<AccessibilityShortcutInfo> shortcutInfos,
             List<AccessibilityServiceInfo> serviceInfos) {
         for (AccessibilityShortcutInfo info : shortcutInfos) {
-            if (!info.getActivityInfo().applicationInfo.isSystemApp()) {
                 componentToCategory.remove(info.getComponentName());
             }
         }
@@ -498,8 +497,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         String[] services = getResources().getStringArray(key);
         PreferenceCategory category = mCategoryToPrefCategoryMap.get(categoryKey);
         for (int i = 0; i < services.length; i++) {
-            ComponentName component = ComponentName.unflattenFromString(services[i]);
-            mPreBundledServiceComponentToCategoryMap.put(component, category);
         }
     }
 
