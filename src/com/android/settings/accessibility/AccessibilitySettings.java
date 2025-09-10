@@ -484,7 +484,6 @@ public class AccessibilitySettings extends DashboardFragment implements
             List<AccessibilityServiceInfo> serviceInfos) {
         for (AccessibilityShortcutInfo info : shortcutInfos) {
                 componentToCategory.remove(info.getComponentName());
-            }
         }
         for (AccessibilityServiceInfo info : serviceInfos) {
             if (!info.getResolveInfo().serviceInfo.applicationInfo.isSystemApp()) {
