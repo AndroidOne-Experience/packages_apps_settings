@@ -109,6 +109,12 @@
             android:title="@string/developer_smallest_width" />
 
         <Preference
+            android:key="notch_enabled_apps"
+            android:title="@string/app_display_cutout_title"
+            android:summary="@string/app_display_cutout_summary"
+            settings:controller="com.android.settings.display.NotchAppsPreferenceController" />
+
+        <Preference
             android:key="icon_manager"
             android:title="@string/icon_manager_title"
             android:summary="@string/icon_manager_summary">
