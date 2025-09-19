@@ -125,4 +125,8 @@
     <string name="override_mock_location_title">Override mock location restriction</string>
     <string name="override_mock_location_summary">When enabled, apps cannot detect mock locations</string>
 
+    <!-- Notch Apps Settings -->
+    <string name="app_display_cutout_title">Fullscreen Apps</string>
+    <string name="app_display_cutout_summary">Choose which apps can extend into the notch area</string>
+
 </resources>
