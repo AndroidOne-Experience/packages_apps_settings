@@ -16,13 +16,9 @@
     <string name="search">Search</string>
     <string name="search_apps">Search apps</string>
 
-    <!-- Hide screen capture status -->
-    <string name="hide_screen_capture_status_title">Hide screen capture status</string>
-    <string name="hide_screen_capture_status_summary">Hide screen capture and screen record status from all applications. Can be convenient in some cases but may lead to privacy leaks. Need to restart applications for the change to take effect.</string>
-
-    <!-- Ignore window secure -->
-    <string name="ignore_window_secure_title">Ignore window secure flags</string>
-    <string name="ignore_window_secure_summary">Remove screenshot and screenrecord limits for all apps. This can be convenient in some cases but may lead to privacy leaks.</string>
+    <!-- Hide screen capture & Ignore secure window status -->
+    <string name="screen_capture_controls_title">Screen capture controls</string>
+    <string name="screen_capture_controls_summary">Manage how screenshots work. You can hide capture status and allow screenshots in protected apps. In some cases, this may lead to privacy leaks.</string>
 
     <!-- Additional settings category -->
     <string name="additional_settings_category_title">Additional Settings</string>
