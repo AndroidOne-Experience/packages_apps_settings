@@ -253,17 +253,10 @@
         settings:controller="com.android.settings.security.MemtagPagePreferenceController" />
 
     <com.android.settings.custom.preference.GlobalSettingSwitchPreference
-        android:order="92"
-        android:key="window_ignore_secure"
-        android:title="@string/ignore_window_secure_title"
-        android:summary="@string/ignore_window_secure_summary"
-        android:defaultValue="false"/>
-
-    <com.android.settings.custom.preference.GlobalSettingSwitchPreference
         android:order="95"
-        android:key="hide_screen_capture_status"
-        android:title="@string/hide_screen_capture_status_title"
-        android:summary="@string/hide_screen_capture_status_summary"
+        android:key="screen_capture_override"
+        android:title="@string/screen_capture_controls_title"
+        android:summary="@string/screen_capture_controls_summary"
         android:defaultValue="false"/>
 
 </PreferenceScreen>
