@@ -178,4 +178,8 @@
     <string name="screen_capture_controls_title">Screen capture controls</string>
     <string name="screen_capture_controls_summary">Manage how screenshots work. You can hide capture status and allow screenshots in protected apps. In some cases, this may lead to privacy leaks.</string>
 
+    <!-- Force LTE_CA -->
+    <string name="force_lte_ca_title">Carrier Aggregation</string>
+    <string name="force_lte_ca_summary">Enhances LTE bandwidth by aggregating supported bands</string>
+
 </resources>
