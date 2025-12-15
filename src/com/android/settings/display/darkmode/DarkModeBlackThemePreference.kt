@@ -25,7 +25,7 @@ import android.os.UserHandle
 import android.provider.Settings
 import android.util.Log
 import com.android.settings.R
-import androidx.preference.SwitchPreference
+import androidx.preference.SwitchPreferenceCompat
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -70,7 +70,7 @@ class DarkModeBlackThemePreference(
         return darkModeStorage.getBoolean(DarkModeMainSwitchPreference.KEY) ?: false
     }
 
-    override fun createWidget(context: Context) = SwitchPreference(context)
+    override fun createWidget(context: Context) = SwitchPreferenceCompat(context)
 }
 
 class BlackThemeStorage(private val context: Context) : KeyValueStore {
