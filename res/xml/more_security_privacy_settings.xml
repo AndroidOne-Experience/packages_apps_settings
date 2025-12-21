@@ -200,6 +200,28 @@
     </Preference>
 
     <Preference
+        android:order="252"
+        android:key="hide_developer_status_settings"
+        android:title="@string/hide_developer_status_title"
+        android:summary="@string/hide_developer_status_summary"
+        android:fragment="com.android.settings.security.HideDeveloperStatusSettings"
+        settings:controller="com.android.settings.security.HideDeveloperStatusPreferenceController" />
+    
+    <com.android.settings.security.KeyboxDataPreference
+        android:order="253"
+        android:key="keybox_data_setting"
+        android:title="@string/keybox_data_title"
+        android:summary="@string/keybox_data_summary"
+        android:defaultValue=""/>
+
+    <com.android.settings.security.PifDataPreference
+        android:order="254"
+        android:key="pif_data_setting"
+        android:title="@string/pif_data_title"
+        android:summary="@string/pif_data_summary"
+        android:defaultValue=""/>
+
+    <Preference
         android:order="260"
         android:key="encryption_and_credential"
         android:title="@string/encryption_and_credential_settings_title"
@@ -232,27 +254,6 @@
         android:fragment="com.android.settings.security.MemtagPage"
         settings:controller="com.android.settings.security.MemtagPagePreferenceController" />
 
-    <Preference
-        android:order="93"
-        android:key="hide_developer_status_settings"
-        android:title="@string/hide_developer_status_title"
-        android:summary="@string/hide_developer_status_summary"
-        android:fragment="com.android.settings.security.HideDeveloperStatusSettings"
-        settings:controller="com.android.settings.security.HideDeveloperStatusPreferenceController" />
-    
-    <com.android.settings.security.KeyboxDataPreference
-        android:order="94"
-        android:key="keybox_data_setting"
-        android:title="@string/keybox_data_title"
-        android:summary="@string/keybox_data_summary"
-        android:defaultValue=""/>
-
-    <com.android.settings.security.PifDataPreference
-        android:order="95"
-        android:key="pif_data_setting"
-        android:title="@string/pif_data_title"
-        android:summary="@string/pif_data_summary"
-        android:defaultValue=""/>
 
     <com.android.settings.custom.preference.GlobalSettingSwitchPreference
         android:order="96"
