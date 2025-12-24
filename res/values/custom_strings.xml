@@ -129,4 +129,10 @@
     <string name="app_display_cutout_title">Fullscreen Apps</string>
     <string name="app_display_cutout_summary">Choose which apps can extend into the notch area</string>
 
+    <!-- Locale Picker -->
+    <string name="clear_search_query_description">Clear query</string>
+    <string name="language_picker_page">Language picker page</string>
+    <string name="search_region">Search regions</string>
+    <string name="search_region_page">Search region page</string>
+
 </resources>
