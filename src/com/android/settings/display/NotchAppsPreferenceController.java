@@ -1,13 +1,14 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.content.Intent;
+import android.app.settings.SettingsEnums;
 import android.provider.Settings;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.R;
 
 public class NotchAppsPreferenceController extends BasePreferenceController {
@@ -33,7 +34,11 @@ public class NotchAppsPreferenceController extends BasePreferenceController {
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY.equals(preference.getKey())) {
-            mContext.startActivity(new Intent(mContext, NotchAppsSelectionActivity.class));
+            new SubSettingLauncher(mContext)
+                    .setDestination(NotchAppsSelectionFragment.class.getName())
+                    .setTitleRes(R.string.app_display_cutout_title)
+                    .setSourceMetricsCategory(SettingsEnums.DISPLAY)
+                    .launch();
             return true;
         }
         return false;

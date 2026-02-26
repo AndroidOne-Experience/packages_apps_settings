@@ -2,15 +2,19 @@ package com.android.settings.display;
 
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,12 +31,28 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class NotchAppsSelectionFragment extends Fragment {
+
+    private static final Set<String> SYSTEM_PACKAGE_WHITELIST = new HashSet<>(Arrays.asList(
+            "com.google.android.youtube",
+            "com.google.android.apps.youtube.music"
+    ));
+
+    private static final Set<String> SYSTEM_PACKAGE_BLACKLIST = new HashSet<>(Arrays.asList(
+            "com.google.ar.core",
+            "com.google.android.contactkeys",
+            "com.google.android.safetycore"
+    ));
 
     private RecyclerView mRecyclerView;
     private PackageManager mPackageManager;
     private final Set<String> mEnabledApps = new HashSet<>();
+    private final Handler mMainHandler = new Handler(Looper.getMainLooper());
+    private final ExecutorService mBackgroundExecutor = Executors.newSingleThreadExecutor();
+    private final LruCache<String, Drawable> mIconCache = new LruCache<>(64);
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,18 +63,41 @@ public class NotchAppsSelectionFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.notch_apps_selection_layout, container, false);
         mRecyclerView = root.findViewById(R.id.apps_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setHasFixedSize(true);
 
-        List<ApplicationInfo> apps = getUserInstalledApps();
-        // Sort alphabetically by label
-        Collections.sort(apps, Comparator.comparing(a -> a.loadLabel(mPackageManager).toString(), String.CASE_INSENSITIVE_ORDER));
-
-        AppListAdapter adapter = new AppListAdapter(apps);
-        mRecyclerView.setAdapter(adapter);
+        loadAppsAsync();
         return root;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mBackgroundExecutor.shutdownNow();
+    }
+
+    private void loadAppsAsync() {
+        mBackgroundExecutor.execute(() -> {
+            List<ApplicationInfo> apps = getUserInstalledApps();
+            // Sort alphabetically by label in background to avoid UI jank.
+            Collections.sort(apps, Comparator.comparing(
+                    a -> a.loadLabel(mPackageManager).toString(),
+                    String.CASE_INSENSITIVE_ORDER));
+
+            if (!isAdded()) {
+                return;
+            }
+
+            mMainHandler.post(() -> {
+                if (!isAdded()) {
+                    return;
+                }
+                mRecyclerView.setAdapter(new AppListAdapter(apps));
+            });
+        });
     }
 
     /**
@@ -78,23 +121,11 @@ public class NotchAppsSelectionFragment extends Fragment {
         List<ApplicationInfo> allApps = mPackageManager.getInstalledApplications(0);
         List<ApplicationInfo> filteredApps = new ArrayList<>();
 
-        // Whitelist entries for system apps allowed for notch usage
-        Set<String> systemPackageWhitelist = new HashSet<>(Arrays.asList(
-                "com.google.android.youtube",
-                "com.google.android.apps.youtube.music"
-        ));
-
-        // Blacklist of system/privileged apps to exclude
-        Set<String> systemPackageBlacklist = new HashSet<>(Arrays.asList(
-                "com.google.ar.core",
-                "com.google.android.contactkeys",
-                "com.google.android.safetycore"
-        ));
-
         for (ApplicationInfo app : allApps) {
-            boolean isSystem = (app.flags & (ApplicationInfo.FLAG_SYSTEM | ApplicationInfo.FLAG_UPDATED_SYSTEM_APP)) != 0;
-            boolean inWhitelist = systemPackageWhitelist.contains(app.packageName);
-            boolean inBlacklist = systemPackageBlacklist.contains(app.packageName);
+            boolean isSystem = (app.flags
+                    & (ApplicationInfo.FLAG_SYSTEM | ApplicationInfo.FLAG_UPDATED_SYSTEM_APP)) != 0;
+            boolean inWhitelist = SYSTEM_PACKAGE_WHITELIST.contains(app.packageName);
+            boolean inBlacklist = SYSTEM_PACKAGE_BLACKLIST.contains(app.packageName);
 
             // Include if non-system or whitelisted system app, and not blacklisted
             if ((!isSystem || inWhitelist) && !inBlacklist) {
@@ -104,11 +135,27 @@ public class NotchAppsSelectionFragment extends Fragment {
         return filteredApps;
     }
 
+    private Drawable getAppIcon(ApplicationInfo appInfo) {
+        Drawable cached = mIconCache.get(appInfo.packageName);
+        if (cached != null) {
+            return cached;
+        }
+        Drawable loaded = appInfo.loadIcon(mPackageManager);
+        mIconCache.put(appInfo.packageName, loaded);
+        return loaded;
+    }
+
     private class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHolder> {
         private final List<ApplicationInfo> mApps;
 
         AppListAdapter(List<ApplicationInfo> apps) {
             mApps = apps;
+            setHasStableIds(true);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return mApps.get(position).packageName.hashCode();
         }
 
         @NonNull
@@ -123,7 +170,7 @@ public class NotchAppsSelectionFragment extends Fragment {
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             ApplicationInfo app = mApps.get(position);
             holder.label.setText(app.loadLabel(mPackageManager));
-            holder.icon.setImageDrawable(app.loadIcon(mPackageManager));
+            holder.icon.setImageDrawable(getAppIcon(app));
             holder.switchToggle.setChecked(mEnabledApps.contains(app.packageName));
 
             holder.itemView.setOnClickListener(v -> {
