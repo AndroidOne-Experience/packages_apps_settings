@@ -1685,14 +1685,7 @@
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
-        <activity
-            android:name=".display.NotchAppsSelectionActivity"
-            android:label="@string/app_display_cutout_title"
-            android:parentActivityName=".Settings$DisplaySettingsActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Settings$DisplaySettingsActivity" />
-        </activity>
+
         <activity
             android:name="Settings$SmartAutoRotateSettingsActivity"
             android:label="@string/accelerometer_title"
