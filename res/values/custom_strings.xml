@@ -210,7 +210,7 @@
     <string name="status_bar_double_tap_to_sleep_summary">Double-tap on the status bar or lockscreen to turn off the display</string>
 
     <!-- Override Mock Location restriction -->
-    <string name="override_mock_location_title">Override MockLocation restriction</string>
+    <string name="override_mock_location_title">Override mock location restriction</string>
     <string name="override_mock_location_summary">When enabled, apps cannot detect mock locations</string>
 
     <!-- Pif Data -->
