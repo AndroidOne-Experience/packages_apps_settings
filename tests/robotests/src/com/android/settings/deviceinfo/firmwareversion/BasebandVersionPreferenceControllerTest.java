@@ -101,5 +101,14 @@ public class BasebandVersionPreferenceControllerTest {
         when(mTelephonyManager.isDeviceVoiceCapable()).thenReturn(false);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
+
+    @Test
+    public void getSummary_duplicateBaseband_returnsTrimmedValue() {
+        final String text = "SS.AT.4.4.c6-00071-RENNELL_GEN_PACK-3.30805.6";
+
+        TelephonyProperties.baseband_version(Arrays.asList(text, text));
+
+        assertThat(mController.getSummary()).isEqualTo(text);
+    }
 }
 // LINT.ThenChange(BasebandVersionPreferenceTest.kt)
