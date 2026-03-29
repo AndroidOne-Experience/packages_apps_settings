@@ -44,10 +44,7 @@ class BasebandVersionPreference :
             context.getString(R.string.device_info_default)
         )
 
-        return baseband
-            .split(",")
-            .firstOrNull { it.isNotEmpty() }
-            ?: baseband
+        return BasebandVersionFormatter.format(baseband)
     }
 
     override fun isAvailable(context: Context) =

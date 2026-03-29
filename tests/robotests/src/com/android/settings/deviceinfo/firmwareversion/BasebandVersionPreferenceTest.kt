@@ -99,5 +99,14 @@ class BasebandVersionPreferenceTest {
         }
         assertThat(basebandVersionPreference.isAvailable(context)).isFalse()
     }
+
+    @Test
+    fun getSummary_duplicateBaseband_returnsTrimmedValue() {
+        val text = "SS.AT.4.4.c6-00071-RENNELL_GEN_PACK-3.30805.6"
+
+        TelephonyProperties.baseband_version(listOf(text, text))
+
+        assertThat(basebandVersionPreference.getSummary(context)).isEqualTo(text)
+    }
 }
 // LINT.ThenChange(BasebandVersionPreferenceControllerTest.java)
