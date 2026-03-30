@@ -112,6 +112,9 @@ public class SimSelectNotification extends BroadcastReceiver {
             case TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED:
                 PrimarySubscriptionListChangedService.scheduleJob(context, intent);
                 break;
+            case Intent.ACTION_AIRPLANE_MODE_CHANGED:
+                onAirplaneModeChanged(context, intent);
+                break;
             case Settings.ACTION_ENABLE_MMS_DATA_REQUEST:
                 onEnableMmsDataRequest(context, intent);
                 break;
@@ -168,6 +171,12 @@ public class SimSelectNotification extends BroadcastReceiver {
         cancelEnableMmsNotification(context);
 
         createEnableMmsNotification(context, notificationTitle, notificationSummary, subId);
+    }
+
+    private void onAirplaneModeChanged(Context context, Intent intent) {
+        if (!intent.getBooleanExtra("state", false)) {
+            DefaultDataSubscriptionRestoreService.scheduleJob(context);
+        }
     }
 
     /**

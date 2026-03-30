@@ -4156,11 +4156,15 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.telephony.action.PRIMARY_SUBSCRIPTION_LIST_CHANGED"/>
+                <action android:name="android.intent.action.AIRPLANE_MODE"/>
                 <action android:name="android.settings.ENABLE_MMS_DATA_REQUEST"/>
             </intent-filter>
         </receiver>
 
         <service android:name=".sim.PrimarySubscriptionListChangedService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <service android:name=".sim.DefaultDataSubscriptionRestoreService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <provider

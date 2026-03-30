@@ -46,6 +46,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.job.JobScheduler;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -91,6 +92,8 @@ public class SimSelectNotificationTest {
     @Mock
     private NotificationManager mNotificationManager;
     @Mock
+    private JobScheduler mJobScheduler;
+    @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
     private SubscriptionManager mSubscriptionManager;
@@ -130,6 +133,7 @@ public class SimSelectNotificationTest {
                 .thenReturn(mNotificationManager);
         when(mContext.getSystemService(NotificationManager.class))
                 .thenReturn(mNotificationManager);
+        when(mContext.getSystemService(JobScheduler.class)).thenReturn(mJobScheduler);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE))
                 .thenReturn(mTelephonyManager);
         when(mContext.getSystemService(UserManager.class))
@@ -234,6 +238,26 @@ public class SimSelectNotificationTest {
         // If MMS data is already enabled, there's no need to trigger the notification.
         mSimSelectNotification.onReceive(mContext, intent);
         verify(mNotificationManager, never()).createNotificationChannel(any());
+    }
+
+    @Test
+    public void onReceiveAirplaneModeChanged_turnedOff_shouldScheduleRestore() {
+        Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        intent.putExtra("state", false);
+
+        mSimSelectNotification.onReceive(mContext, intent);
+
+        verify(mJobScheduler).schedule(any());
+    }
+
+    @Test
+    public void onReceiveAirplaneModeChanged_turnedOn_shouldNotScheduleRestore() {
+        Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        intent.putExtra("state", true);
+
+        mSimSelectNotification.onReceive(mContext, intent);
+
+        verify(mJobScheduler, never()).schedule(any());
     }
 
     @Test
