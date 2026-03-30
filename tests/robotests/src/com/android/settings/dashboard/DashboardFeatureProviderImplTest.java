@@ -62,6 +62,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Pair;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
@@ -87,6 +88,7 @@ import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.ProviderTile;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -100,7 +102,9 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
+import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowIcon;
 import org.robolectric.util.ReflectionHelpers;
@@ -109,7 +113,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class, ShadowIcon.class})
+@Config(shadows = {
+        ShadowUserManager.class,
+        ShadowIcon.class,
+        DashboardFeatureProviderImplTest.ShadowSettingsThemeHelper.class
+})
 public class DashboardFeatureProviderImplTest {
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
@@ -138,6 +146,7 @@ public class DashboardFeatureProviderImplTest {
     @Before
     public void setUp() {
         mContext = spy(mApplication);
+        ShadowSettingsThemeHelper.setExpressiveTheme(false);
         doReturn(mApplication).when(mActivity).getApplicationContext();
         mForceRoundedIcon = false;
         mActivityInfo = new ActivityInfo();
@@ -529,6 +538,49 @@ public class DashboardFeatureProviderImplTest {
         Shadows.shadowOf(Looper.getMainLooper()).idle();
 
         assertThat(preference.getIcon()).isNull();
+    }
+
+    @Test
+    public void bindIcon_expressiveHomepageTopLevelPreference_usesLegacyHomepageIcon() {
+        ShadowSettingsThemeHelper.setExpressiveTheme(true);
+
+        final Preference preference = new Preference(mApplication);
+        mActivityInfo.packageName = mApplication.getPackageName();
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "top_level_network");
+        mActivityInfo.metaData.putInt(META_DATA_PREFERENCE_ICON, R.drawable.ic_homepage_network);
+
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
+                preference, tile, null /* key */, Preference.DEFAULT_ORDER);
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+        final Bitmap preferenceBmp = Utils.createIconWithDrawable(preference.getIcon()).getBitmap();
+        final Drawable expectedIcon = Icon.createWithResource(mActivityInfo.packageName,
+                R.drawable.ic_settings_wireless_filled).loadDrawable(preference.getContext());
+        final Bitmap expectedBmp = Utils.createIconWithDrawable(expectedIcon).getBitmap();
+        assertThat(preferenceBmp.sameAs(expectedBmp)).isTrue();
+    }
+
+    @Test
+    public void bindIcon_expressiveHomepageExtraPreference_usesLegacyTintedIcon() {
+        ShadowSettingsThemeHelper.setExpressiveTheme(true);
+
+        final Preference preference = new Preference(mApplication);
+        mActivityInfo.packageName = mApplication.getPackageName();
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "homepage_extra_key");
+        mActivityInfo.metaData.putInt(META_DATA_PREFERENCE_ICON, R.drawable.ic_settings_backup);
+
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
+                preference, tile, null /* key */, Preference.DEFAULT_ORDER);
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+        final Bitmap preferenceBmp = Utils.createIconWithDrawable(preference.getIcon()).getBitmap();
+        final Drawable expectedIcon = Icon.createWithResource(mActivityInfo.packageName,
+                R.drawable.ic_settings_backup).loadDrawable(preference.getContext()).mutate();
+        expectedIcon.setTint(Utils.getHomepageIconColor(preference.getContext()));
+        final Bitmap expectedBmp = Utils.createIconWithDrawable(expectedIcon).getBitmap();
+        assertThat(preferenceBmp.sameAs(expectedBmp)).isTrue();
     }
 
     @Test
@@ -995,6 +1047,20 @@ public class DashboardFeatureProviderImplTest {
         @Override
         public String getHighlightPreferenceKey() {
             return mHighlightPreferenceKey;
+        }
+    }
+
+    @Implements(SettingsThemeHelper.class)
+    public static class ShadowSettingsThemeHelper {
+        private static boolean sIsExpressiveTheme;
+
+        @Implementation
+        public static boolean isExpressiveTheme(@NonNull Context context) {
+            return sIsExpressiveTheme;
+        }
+
+        static void setExpressiveTheme(boolean isExpressiveTheme) {
+            sIsExpressiveTheme = isExpressiveTheme;
         }
     }
 }

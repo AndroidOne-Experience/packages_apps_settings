@@ -102,6 +102,28 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     private static final String DASHBOARD_TILE_PREF_KEY_PREFIX = "dashboard_tile_pref_";
     private static final String META_DATA_KEY_INTENT_ACTION = "com.android.settings.intent.action";
     private static final String TOP_LEVEL_ACCOUNT_CATEGORY = "top_level_account_category";
+    private static final String TOP_LEVEL_NETWORK = "top_level_network";
+    private static final String TOP_LEVEL_CONNECTED_DEVICES = "top_level_connected_devices";
+    private static final String TOP_LEVEL_APPS = "top_level_apps";
+    private static final String TOP_LEVEL_NOTIFICATIONS = "top_level_notifications";
+    private static final String TOP_LEVEL_SOUND = "top_level_sound";
+    private static final String TOP_LEVEL_PRIORITY_MODES = "top_level_priority_modes";
+    private static final String TOP_LEVEL_COMMUNAL = "top_level_communal";
+    private static final String TOP_LEVEL_DISPLAY = "top_level_display";
+    private static final String TOP_LEVEL_WALLPAPER = "top_level_wallpaper";
+    private static final String TOP_LEVEL_STORAGE = "top_level_storage";
+    private static final String TOP_LEVEL_BATTERY = "top_level_battery";
+    private static final String TOP_LEVEL_SYSTEM = "top_level_system";
+    private static final String TOP_LEVEL_ABOUT_DEVICE = "top_level_about_device";
+    private static final String TOP_LEVEL_SAFETY_CENTER = "top_level_safety_center";
+    private static final String TOP_LEVEL_SECURITY = "top_level_security";
+    private static final String TOP_LEVEL_PRIVACY = "top_level_privacy";
+    private static final String TOP_LEVEL_LOCATION = "top_level_location";
+    private static final String TOP_LEVEL_ACCOUNTS = "top_level_accounts";
+    private static final String TOP_LEVEL_SUPERVISION = "top_level_supervision";
+    private static final String TOP_LEVEL_EMERGENCY = "top_level_emergency";
+    private static final String TOP_LEVEL_ACCESSIBILITY = "top_level_accessibility";
+    private static final String TOP_LEVEL_SUPPORT = "top_level_support";
 
     @VisibleForTesting
     enum ColorScheme {
@@ -532,8 +554,16 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             // Handle homepage icons
             if (TextUtils.equals(tile.getCategory(), CategoryKey.CATEGORY_HOMEPAGE)) {
                 if (SettingsThemeHelper.isExpressiveTheme(mContext)) {
-                    preference.setIcon(getExpressiveHomepageIcon(tile, iconDrawable, iconPackage));
-                    return;
+                    // Keep the built-in Settings homepage entries on the legacy glyph set even
+                    // when the rest of the expressive homepage styling is enabled.
+                    final int legacyHomepageIconResId =
+                            getLegacyHomepageIconResId(preference, tile);
+                    if (legacyHomepageIconResId != 0) {
+                        preference.setIcon(legacyHomepageIconResId);
+                        return;
+                    }
+                    // Fall back to the pre-A16 monochrome/tinted treatment for any additional
+                    // homepage tiles that are not part of the built-in top-level set.
                 }
                 // Skip tinting and Adaptive Icon transformation for homepage account type raw icons
                 if (TextUtils.equals(tile.getGroupKey(), TOP_LEVEL_ACCOUNT_CATEGORY)
@@ -551,6 +581,41 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             }
             preference.setIcon(iconDrawable);
         }, new Handler(Looper.getMainLooper()));
+    }
+
+    private int getLegacyHomepageIconResId(Preference preference, Tile tile) {
+        final String key = !TextUtils.isEmpty(preference.getKey())
+                ? preference.getKey()
+                : tile.getKey(mContext);
+        if (TextUtils.isEmpty(key)) {
+            return 0;
+        }
+
+        return switch (key) {
+            case TOP_LEVEL_NETWORK -> R.drawable.ic_settings_wireless_filled;
+            case TOP_LEVEL_CONNECTED_DEVICES -> R.drawable.ic_devices_other_filled;
+            case TOP_LEVEL_APPS -> R.drawable.ic_apps_filled;
+            case TOP_LEVEL_NOTIFICATIONS -> R.drawable.ic_notifications_filled;
+            case TOP_LEVEL_SOUND -> R.drawable.ic_volume_up_filled;
+            case TOP_LEVEL_PRIORITY_MODES -> com.android.internal.R.drawable.ic_zen_priority_modes;
+            case TOP_LEVEL_COMMUNAL -> R.drawable.ia_settings_communal;
+            case TOP_LEVEL_DISPLAY -> R.drawable.ic_settings_display_filled;
+            case TOP_LEVEL_WALLPAPER -> R.drawable.ic_settings_wallpaper_filled;
+            case TOP_LEVEL_STORAGE -> R.drawable.ic_storage_filled;
+            case TOP_LEVEL_BATTERY -> R.drawable.ic_settings_battery_filled;
+            case TOP_LEVEL_SYSTEM -> R.drawable.ic_settings_system_dashboard_filled;
+            case TOP_LEVEL_ABOUT_DEVICE -> R.drawable.ic_settings_about_device_filled;
+            case TOP_LEVEL_SAFETY_CENTER -> R.drawable.ic_settings_safety_center_filled;
+            case TOP_LEVEL_SECURITY -> R.drawable.ic_settings_security_filled;
+            case TOP_LEVEL_PRIVACY -> R.drawable.ic_settings_privacy_filled;
+            case TOP_LEVEL_LOCATION -> R.drawable.ic_settings_location_filled;
+            case TOP_LEVEL_ACCOUNTS -> R.drawable.ic_settings_passwords_filled;
+            case TOP_LEVEL_SUPERVISION -> R.drawable.ic_account_child_invert;
+            case TOP_LEVEL_EMERGENCY -> R.drawable.ic_settings_emergency_filled;
+            case TOP_LEVEL_ACCESSIBILITY -> R.drawable.ic_settings_accessibility_filled;
+            case TOP_LEVEL_SUPPORT -> R.drawable.ic_help_filled;
+            default -> 0;
+        };
     }
 
     private Drawable getExpressiveHomepageIcon(Tile tile, Drawable iconDrawable,
