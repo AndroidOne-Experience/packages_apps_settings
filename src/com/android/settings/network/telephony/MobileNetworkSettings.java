@@ -51,6 +51,7 @@ import com.android.settings.Utils;
 import com.android.settings.datausage.BillingCyclePreferenceController;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
 import com.android.settings.flags.Flags;
+import com.android.settings.network.AllowedNetworkTypesListener;
 import com.android.settings.network.CarrierWifiTogglePreferenceController;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settings.network.SubscriptionUtil;
@@ -99,6 +100,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
     private static final String KEY_FORCE_LTE_CA = "force_lte_ca";
     private SwitchPreferenceCompat mForceLteCAPreference;
+    private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
 
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 
@@ -122,6 +124,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED)) {
                 redrawPreferenceControllers();
+                updateForceLteCAState();
             }
         }
     };
@@ -359,16 +362,18 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         super.onCreate(icicle);
 
         mForceLteCAPreference = findPreference(KEY_FORCE_LTE_CA);
-        mForceLteCAPreference.setOnPreferenceChangeListener((preference, newValue) -> {
-            boolean enabled = (Boolean) newValue;
-            int phoneId = SubscriptionManager.getPhoneId(mSubId);
-            Settings.Global.putInt(
-                getContext().getContentResolver(),
-                Settings.Global.FORCE_LTE_CA + "_" + phoneId,
-                enabled ? 1 : 0
-            );
-            return true;
-        });
+        if (mForceLteCAPreference != null) {
+            mForceLteCAPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+                boolean enabled = (Boolean) newValue;
+                int phoneId = SubscriptionManager.getPhoneId(mSubId);
+                Settings.Global.putInt(
+                        getContext().getContentResolver(),
+                        Settings.Global.FORCE_LTE_CA + "_" + phoneId,
+                        enabled ? 1 : 0
+                );
+                return true;
+            });
+        }
 
         if (isUiRestricted()) {
             Log.d(LOG_TAG, "Mobile network page is disallowed.");
@@ -379,6 +384,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mTelephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
+        mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(context.getMainExecutor());
+        mAllowedNetworkTypesListener.setAllowedNetworkTypesListener(this::updateForceLteCAState);
 
         session.close();
 
@@ -410,6 +417,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         super.onResume();
         mMobileNetworkRepository.addRegister(this, this, mSubId);
         mMobileNetworkRepository.updateEntity();
+        if (mAllowedNetworkTypesListener != null
+                && SubscriptionManager.isValidSubscriptionId(mSubId)) {
+            mAllowedNetworkTypesListener.register(getContext(), mSubId);
+        }
 
         updateForceLteCAState();
 
@@ -429,6 +440,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                     Settings.Global.FORCE_LTE_CA + "_" + phoneId,
                     0) == 1;
             mForceLteCAPreference.setChecked(enabled);
+            mForceLteCAPreference.setEnabled(
+                    MobileNetworkUtils.isLteOrAboveAllowedNetworkTypes(mTelephonyManager));
         }
     }
 
@@ -449,6 +462,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @Override
     public void onPause() {
         mMobileNetworkRepository.removeRegister(this);
+        if (mAllowedNetworkTypesListener != null
+                && SubscriptionManager.isValidSubscriptionId(mSubId)) {
+            mAllowedNetworkTypesListener.unregister(getContext(), mSubId);
+        }
         getContext().unregisterReceiver(mBrocastReceiver);
         super.onPause();
     }
