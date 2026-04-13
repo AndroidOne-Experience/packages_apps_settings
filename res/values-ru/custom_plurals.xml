@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Notch app settings -->
+    <plurals name="notch_apps_summary">
+        <item quantity="zero">Нет вкл. приложений</item>
+        <item quantity="one">%d приложение включено</item>
+        <item quantity="other">%d приложений включены</item>
+    </plurals>
+
+</resources>
