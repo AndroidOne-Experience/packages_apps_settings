@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- [CHAR LIMIT=NONE] Device Info screen. Countdown for user taps to enable development settings -->
+    <string name="show_dev_countdown_cm">{count, plural,
+      =1      {Вы в одном шаге от включения параметров разработчика.}
+      other   {Вы в # шагах от включения параметров разработчика.}
+    }</string>
+    <!-- [CHAR LIMIT=NONE] Device Info screen. Confirmation that developer settings are enabled -->
+    <string name="show_dev_on_cm">Вы включили параметры разработчика!</string>
+    <!-- [CHAR LIMIT=NONE] Device Info screen. Okay we get it, stop pressing, you already have it on -->
+    <string name="show_dev_already_cm">Нет необходимости, параметры разработчика уже включены.</string>
+
+    <!-- Message shown in fingerprint enrollment dialog to locate the sensor -->
+    <string name="fingerprint_enroll_find_sensor_message_front" product="tablet">Найдите датчик отпечатков пальцев на передней стороне вашего планшета.</string>
+    <string name="fingerprint_enroll_find_sensor_message_front" product="device">Найдите датчик отпечатков пальцев на передней стороне вашего устройства.</string>
+    <string name="fingerprint_enroll_find_sensor_message_front" product="default">Найдите датчик отпечатков пальцев на передней стороне вашего телефона.</string>
+    <string name="fingerprint_enroll_find_sensor_message_rear" product="tablet">Найдите датчик отпечатков пальцев на задней стороне вашего планшета.</string>
+    <string name="fingerprint_enroll_find_sensor_message_rear" product="device">Найдите датчик отпечатков пальцев на задней стороне вашего устройства.</string>
+    <string name="fingerprint_enroll_find_sensor_message_rear" product="default">Найдите датчик отпечатков пальцев на задней стороне вашего телефона.</string>
+    <string name="fingerprint_enroll_find_sensor_message_side" product="tablet">Найдите датчик отпечатков пальцев на боковой стороне вашего планшета.</string>
+    <string name="fingerprint_enroll_find_sensor_message_side" product="device">Найдите датчик отпечатков пальцев на боковой стороне вашего устройства.</string>
+    <string name="fingerprint_enroll_find_sensor_message_side" product="default">Найдите датчик отпечатков пальцев на боковой стороне вашего телефона.</string>
+
+    <!-- Message shown when user touches the icon on the screen, instead of the real fingerprint sensor -->
+    <string name="fingerprint_enroll_touch_dialog_message_front" product="tablet">Коснитесь датчика на передней стороне вашего планшета.</string>
+    <string name="fingerprint_enroll_touch_dialog_message_front" product="device">Коснитесь датчика на передней стороне вашего устройства.</string>
+    <string name="fingerprint_enroll_touch_dialog_message_front" product="default">Коснитесь датчика на передней стороне вашего телефона.</string>
+    <string name="fingerprint_enroll_touch_dialog_message_rear" product="tablet">Коснитесь датчика на задней стороне вашего планшета.</string>
+    <string name="fingerprint_enroll_touch_dialog_message_rear" product="device">Коснитесь датчика на задней стороне вашего устройства.</string>
+    <string name="fingerprint_enroll_touch_dialog_message_rear" product="default">Коснитесь датчика на задней стороне вашего телефона.</string>
+    <string name="fingerprint_enroll_touch_dialog_message_side" product="tablet">Коснитесь датчика на боковой стороне вашего планшета.</string>
+    <string name="fingerprint_enroll_touch_dialog_message_side" product="device">Коснитесь датчика на боковой стороне вашего устройства.</string>
+    <string name="fingerprint_enroll_touch_dialog_message_side" product="default">Коснитесь датчика на боковой стороне вашего телефона.</string>
+
+    <!-- Warning message for the sd card setup -->
+    <string name="storage_warning_internal">Внимание: этот параметр может работать некорректно или привести к потере данных, поэтому не рекомендуется!</string>
+
+    <!-- Location settings screen, setting check box label if Assisted GPS should be enabled -->
+    <string name="assisted_gps">Использовать вспомогательный GPS</string>
+    <!-- Location settings screen, setting summary for Assisted GPS switch -->
+    <string name="assisted_gps_summary">Загружает вспомогательные данные со спутников через интернет, что может значительно ускорить запуск GPS. Для экстренных вызовов вспомогательный GPS всегда разрешён.</string>
+
+    <!-- Private DNS -->
+    <string name="private_dns_mode_cloudflare" translatable="false">Cloudflare DNS</string>
+    <!-- Alternative: 1dot1dot1dot1.cloudflare-dns.com -->
+    <string name="private_dns_hostname_cloudflare" translatable="false">one.one.one.one</string>
+
+    <!-- Auto pin confirm -->
+    <string name="lock_screen_auto_pin_confirm_summary_custom">Автоматически разблокировать при вводе правильного PIN-кода. Это нихуяшечки менее безопасно, чем подтверждение кнопкой Enter.</string>
+
+    <!-- Copy to clipboard -->
+    <string name="copied_to_clipboard">Скопировано в буфер обмена</string>
+    <string name="longpress_to_clipboard">Удерживайте для копирования</string>
+
+    <!-- Double tap to sleep on status bar or lockscreen -->
+    <string name="status_bar_double_tap_to_sleep_title">Коснитесь для сна</string>
+    <string name="status_bar_double_tap_to_sleep_summary">Дважды коснитесь строки состояния или экрана блокировки, чтобы выключить экран</string>
+
+    <!-- Refresh rate -->
+    <string name="refresh_rate_title">Частота обновления</string>
+    <string name="refresh_rate_summary_vrr_off">%d Гц</string>
+    <string name="refresh_rate_summary_vrr_on">%d Гц (Адаптивно)</string>
+    <string name="refresh_rate_vrr_title">Адаптивная частота обновления</string>
+    <string name="refresh_rate_vrr_summary">Автоматически снижает частоту обновления, когда экран не используется, для экономии энергии. Может вызывать мерцание или изменение цветов на некоторых дисплеях</string>
+    <string name="refresh_rate_footer">Более высокая частота обновления делает экран плавнее, но увеличивает расход энергии</string>
+    <string name="keywords_refresh_rate">частота, обновления, плавно, пик, 60гц, 90гц, 120гц, 144гц, 165гц</string>
+
+    <!-- Battery saver refresh rate -->
+    <string name="battery_saver_refresh_rate_title">Снизить частоту обновления</string>
+    <string name="battery_saver_refresh_rate_summary">Использовать 60 Гц при включённом режиме энергосбережения</string>
+
+    <!-- Preference and settings suggestion title text for screen off UDFPS [CHAR LIMIT=60]-->
+    <string name="ambient_display_screen_off_udfps_title">Отпечаток всегда активен</string>
+    
+    <!-- Summary text for screen off UDFPS [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_screen_off_udfps_summary">Позволяет разблокировать с выключенным экраном.\nМожет вызывать случайные возбуждения.</string>
+
+    <!-- Black theme for dark mode -->
+    <string name="berry_black_theme_title">Чисто негрийский</string>
+    <string name="berry_black_theme_summary">Полностью чёрный фон для тёмной темы</string>
+
+    <!-- Three-fingers-swipe to screenshot -->
+    <string name="three_finger_gesture">Свайп для скриншота</string>
+    <string name="three_finger_gesture_summary">Проведите тремя пальцами вниз, чтобы сделать скрин(кам)шот</string>
+
+    <!-- Incall vibrate options -->
+    <string name="incall_vibration_category">Вибрация при звонках</string>
+    <string name="incall_vibrate_connect_title">Вибрация при соединении</string>
+    <string name="incall_vibrate_call_wait_title">Вибрация при ожидании вызова</string>
+    <string name="incall_vibrate_disconnect_title">Вибрация при завершении</string>
+
+    <!-- Ambient wake toggles -->
+    <string name="doze_gesture_ambient_title">Показывать Ambient</string>
+    <string name="doze_gesture_ambient_summary">Показывать Окружающий Дисплей вместо полного включения экрана</string>
+    <string name="gesture_wake_ambient">Показать Окружающее(че)</string>
+    <string name="gesture_wake">Полностью включить</string>
+
+    <!-- Doze enablement -->
+    <string name="doze_enabled_title">Окружающий дисплей</string>
+    <string name="doze_enabled_summary">Включает функциональность "дозы"</string>
+
+    <!-- Status bar Icon Manager -->
+    <string name="icon_manager_title">Менеджер иконок</string>
+    <string name="icon_manager_summary">Управление отображением иконок строки состояния</string>
+
+    <!-- Keybox Data -->
+    <string name="keybox_data_title">Выбрать keybox XML для подмены</string>
+    <string name="keybox_data_summary">Выберите keybox XML для системной подмены ключа аттестации. Нажмите удалить для сброса данных keybox. Хотя я советую быть как боб</string>
+
+    <!-- Pif Data -->
+    <string name="pif_data_title">Выбрать PIF JSON для подмены</string>
+    <string name="pif_data_summary">Выберите PIF JSON для подмены пропов аттестации для GMS и Play Market. Нажмите удалить, чтобы сбросить и использовать динамические значения по умолчанию.</string>
+
+    <!-- Global Actions -->
+    <string name="global_actions_advanced_reboot_title">Расширенная перезагрузка</string>
+    <string name="global_actions_advanced_reboot_summary">Показывать рекавери и фастбут в меню питания</string>
+
+    <!-- Override Mock Location restriction -->
+    <string name="override_mock_location_title">Игнорировать фиктивную геолокацию</string>
+    <string name="override_mock_location_summary">При включении приложения не смогут определить подмену местоположения</string>
+
+    <!-- Notch Apps Settings -->
+    <string name="app_display_cutout_title">Полноэкранные приложения</string>
+    <string name="app_display_cutout_summary">Выберите, какие приложения могут использовать область выреза</string>
+
+    <!-- Locale Picker -->
+    <string name="clear_search_query_description">Очистить запрос</string>
+    <string name="language_picker_page">Страница выбора языка</string>
+    <string name="search_region">Поиск регионов</string>
+    <string name="search_region_page">Страница выбора региона</string>
+
+    <!-- AdGuard DNS Option -->
+    <string name="private_dns_mode_adguard" translatable="false">AdGuard DNS</string>
+    <!-- AdGuard DNS hostname -->
+    <string name="private_dns_hostname_adguard" translatable="false">dns.adguard.com</string>
+    <!-- Open DNS Option -->
+    <string name="private_dns_mode_open_dns" translatable="false">Open DNS</string>
+    <!-- Open DNS hostname -->
+    <string name="private_dns_hostname_open_dns" translatable="false">dns.opendns.com</string>
+    <!-- Cleanbrowsing DNS Option -->
+    <string name="private_dns_mode_cleanbrowsing" translatable="false">Cleanbrowsing DNS</string>
+    <!-- Cleanbrowsing DNS hostname -->
+    <string name="private_dns_hostname_cleanbrowsing" translatable="false">security-filter-dns.cleanbrowsing.org</string>
+    <!-- Quad9 DNS Option -->
+    <string name="private_dns_mode_quad9" translatable="false">Quad9 DNS</string>
+    <!-- Quad9 DNS hostname -->
+    <string name="private_dns_hostname_quad9" translatable="false">dns.quad9.net</string>
+    <!-- Cloudflare Block Malware DNS Option -->
+    <string name="private_dns_mode_cloudflare_block_malware" translatable="false">Cloudflare Block Malware DNS</string>
+    <!-- Cloudflare Block Malware DNS hostname -->
+    <string name="private_dns_hostname_cloudflare_block_malware" translatable="false">security.cloudflare-dns.com</string>
+    <!-- Cloudflare Block Malware and Adult Content DNS Option -->
+    <string name="private_dns_mode_cloudflare_block_malware_and_adult_content" translatable="false">Cloudflare Block Malware and Adult Content DNS</string>
+    <!-- Cloudflare Block Malware and Adult Content DNS hostname -->
+    <string name="private_dns_hostname_cloudflare_block_malware_and_adult_content" translatable="false">family.cloudflare-dns.com</string>
+    <!-- Quad9 Unsecured DNS Option -->
+    <string name="private_dns_mode_quad9_unsecured" translatable="false">Quad9 Unsecured DNS</string>
+    <!-- Quad9 Unsecured DNS hostname -->
+    <string name="private_dns_hostname_quad9_unsecured" translatable="false">dns10.quad9.net</string>
+    <!-- Quad9 ECS DNS Option -->
+    <string name="private_dns_mode_quad9_ecs" translatable="false">Quad9 with ECS DNS</string>
+    <!-- Quad9 ECS DNS hostname -->
+    <string name="private_dns_hostname_quad9_ecs" translatable="false">dns11.quad9.net</string>
+    <!-- Quad9 Unsecured ECS DNS Option -->
+    <string name="private_dns_mode_quad9_unsecured_ecs" translatable="false">Quad9 Unsecured with ECS DNS</string>
+    <!-- Quad9 Unsecured ECS DNS hostname -->
+    <string name="private_dns_hostname_quad9_unsecured_ecs" translatable="false">dns12.quad9.net</string>
+
+    <!-- Hide developer status -->
+    <string name="hide_developer_status_title">Скрыть статус разработчика</string>
+    <string name="hide_developer_status_summary">Скрыть статус разработчика от приложений</string>
+    <string name="search">Поиск</string>
+    <string name="search_apps">Поиск приложений</string>
+
+    <!-- Hide screen capture & Ignore secure window status -->
+    <string name="screen_capture_controls_title">Управление скриншотами</string>
+    <string name="screen_capture_controls_summary">Управляйте поведением скриншотов. Можно скрыть статус захвата и разрешить скриншоты в защищённых приложениях. Может привести к течке данных.</string>
+
+    <!-- Force LTE_CA -->
+    <string name="force_lte_ca_title">Агрегация частот</string>
+    <string name="force_lte_ca_summary">Увеличивает пропускную способность LTE за счёт объединения диапазонов</string>
+
+    <!-- Android debugging as root -->
+    <string name="adb_enable_root">Рут дебаг</string>
+    <string name="adb_enable_summary_root">Разрешить выполнение дебага Android с рут-правами</string>
+
+    <!-- Hotspot extras -->
+    <string name="tethering_allow_vpn_upstreams_title">КВН для подключённых устройств</string>
+    <string name="tethering_allow_vpn_upstreams_summary">Если устройство использует VPN, все подключённые устройства будут использовать тот же КВН</string>
+
+    <!-- Radio Info -->
+    <string name="radio_info_title">Информация о радио</string>
+
+</resources>
