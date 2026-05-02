@@ -5,8 +5,14 @@
     <!-- Notch app settings -->
     <plurals name="notch_apps_summary">
         <item quantity="zero">Нет вкл. приложений</item>
-        <item quantity="one">%d приложение включено</item>
-        <item quantity="other">%d приложений включены</item>
+        <item quantity="one">%d приложение вкл.</item>
+        <item quantity="other">%d приложений вкл.</item>
+    </plurals>
+
+    <!-- Hotspot -->
+    <plurals name="wifi_hotspot_client_limit_summary">
+        <item quantity="other">До <xliff:g id="device_num">%1$d</xliff:g> устройств может подключиться к этой сети</item>
+        <item quantity="one">До <xliff:g id="device_num">%1$d</xliff:g> устройства может подключиться к этой сети</item>
     </plurals>
 
 </resources>
