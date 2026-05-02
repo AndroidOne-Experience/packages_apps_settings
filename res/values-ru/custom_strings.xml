@@ -35,12 +35,12 @@
     <string name="fingerprint_enroll_touch_dialog_message_side" product="default">Коснитесь датчика на боковой стороне вашего телефона.</string>
 
     <!-- Warning message for the sd card setup -->
-    <string name="storage_warning_internal">Внимание: этот параметр может работать некорректно или привести к потере данных, поэтому не рекомендуется!</string>
+    <string name="storage_warning_internal">Внимание: этот параметр может работать некорректно или привести к потере данных, поэтому не рекомендуется его включать!</string>
 
     <!-- Location settings screen, setting check box label if Assisted GPS should be enabled -->
-    <string name="assisted_gps">Использовать вспомогательный GPS</string>
+    <string name="assisted_gps">Использовать A-GPS</string>
     <!-- Location settings screen, setting summary for Assisted GPS switch -->
-    <string name="assisted_gps_summary">Загружает вспомогательные данные со спутников через интернет, что может значительно ускорить запуск GPS. Для экстренных вызовов вспомогательный GPS всегда разрешён.</string>
+    <string name="assisted_gps_summary">Загружает вспомогательные данные со спутников через интернет, что может значительно ускорить запуск GPS. Для экстренных вызовов A-GPS всегда разрешён.</string>
 
     <!-- Private DNS -->
     <string name="private_dns_mode_cloudflare" translatable="false">Cloudflare DNS</string>
@@ -74,12 +74,12 @@
     <string name="ambient_display_screen_off_udfps_summary">Позволяет разблокировать с выключенным экраном.\nМожет вызывать случайные возбуждения.</string>
 
     <!-- Black theme for dark mode -->
-    <string name="berry_black_theme_title">Чисто негрийский</string>
+    <string name="berry_black_theme_title">Чисто эль негрос</string>
     <string name="berry_black_theme_summary">Полностью чёрный фон для тёмной темы</string>
 
     <!-- Three-fingers-swipe to screenshot -->
     <string name="three_finger_gesture">Свайп для скриншота</string>
-    <string name="three_finger_gesture_summary">Проведите тремя пальцами вниз, чтобы сделать скрин(кам)шот</string>
+    <string name="three_finger_gesture_summary">Свайпните тремя пальцами вниз, чтобы сделать камшот</string>
 
     <!-- Incall vibrate options -->
     <string name="incall_vibration_category">Вибрация при звонках</string>
@@ -88,9 +88,9 @@
     <string name="incall_vibrate_disconnect_title">Вибрация при завершении</string>
 
     <!-- Ambient wake toggles -->
-    <string name="doze_gesture_ambient_title">Показывать Ambient</string>
-    <string name="doze_gesture_ambient_summary">Показывать Окружающий Дисплей вместо полного включения экрана</string>
-    <string name="gesture_wake_ambient">Показать Окружающее(че)</string>
+    <string name="doze_gesture_ambient_title">Окружающий Дисплей</string>
+    <string name="doze_gesture_ambient_summary">Показывать окружающий дисплей вместо полного включения экрана</string>
+    <string name="gesture_wake_ambient">Показать Окружающее(чебля)</string>
     <string name="gesture_wake">Полностью включить</string>
 
     <!-- Doze enablement -->
@@ -98,7 +98,7 @@
     <string name="doze_enabled_summary">Включает функциональность "дозы"</string>
 
     <!-- Status bar Icon Manager -->
-    <string name="icon_manager_title">Менеджер иконок</string>
+    <string name="icon_manager_title">Управление иконками</string>
     <string name="icon_manager_summary">Управление отображением иконок строки состояния</string>
 
     <!-- Keybox Data -->
@@ -106,12 +106,12 @@
     <string name="keybox_data_summary">Выберите keybox XML для системной подмены ключа аттестации. Нажмите удалить для сброса данных keybox. Хотя я советую быть как боб</string>
 
     <!-- Pif Data -->
-    <string name="pif_data_title">Выбрать PIF JSON для подмены</string>
-    <string name="pif_data_summary">Выберите PIF JSON для подмены пропов аттестации для GMS и Play Market. Нажмите удалить, чтобы сбросить и использовать динамические значения по умолчанию.</string>
+    <string name="pif_data_title">Выбрать PIF jSON для подмены</string>
+    <string name="pif_data_summary">Выберите PIF jSON для подмены пропов аттестации для GMS и Play Market. Нажмите удалить, чтобы сбросить и использовать динамические значения по умолчанию.</string>
 
     <!-- Global Actions -->
     <string name="global_actions_advanced_reboot_title">Расширенная перезагрузка</string>
-    <string name="global_actions_advanced_reboot_summary">Показывать рекавери и фастбут в меню питания</string>
+    <string name="global_actions_advanced_reboot_summary">Показывать кнопки перезагрузки в рекавери и фастбут в меню питания</string>
 
     <!-- Override Mock Location restriction -->
     <string name="override_mock_location_title">Игнорировать фиктивную геолокацию</string>
@@ -172,21 +172,36 @@
 
     <!-- Hide screen capture & Ignore secure window status -->
     <string name="screen_capture_controls_title">Управление скриншотами</string>
-    <string name="screen_capture_controls_summary">Управляйте поведением скриншотов. Можно скрыть статус захвата и разрешить скриншоты в защищённых приложениях. Может привести к течке данных.</string>
+    <string name="screen_capture_controls_summary">Включив эту настройку, в защищенных приложениях и системе будет отключено ограничение на создание скриншотов там, где это запрещено. Может привести к течке данных</string>
 
     <!-- Force LTE_CA -->
     <string name="force_lte_ca_title">Агрегация частот</string>
     <string name="force_lte_ca_summary">Увеличивает пропускную способность LTE за счёт объединения диапазонов</string>
 
     <!-- Android debugging as root -->
-    <string name="adb_enable_root">Рут дебаг</string>
-    <string name="adb_enable_summary_root">Разрешить выполнение дебага Android с рут-правами</string>
+    <string name="adb_enable_root">Отладка с root-правами</string>
+    <string name="adb_enable_summary_root">Разрешить отладку Android с root-правами</string>
 
     <!-- Hotspot extras -->
     <string name="tethering_allow_vpn_upstreams_title">КВН для подключённых устройств</string>
-    <string name="tethering_allow_vpn_upstreams_summary">Если устройство использует VPN, все подключённые устройства будут использовать тот же КВН</string>
+    <string name="tethering_allow_vpn_upstreams_summary">Если устройство использует КВН, все подключённые устройства будут использовать тот же КВН</string>
 
     <!-- Radio Info -->
     <string name="radio_info_title">Информация о радио</string>
+
+    <!-- Hotspot -->
+    <string name="wifi_hotspot_hidden_ssid_title">Скрытая сеть</string>
+    <string name="wifi_hotspot_hidden_ssid_summary">Ваша точка доступа не появится в списке доступных Wi-Fi сетей.</string>
+    <string name="wifi_hotspot_client_manager_title">Подключенные устройства</string>
+    <string name="wifi_hotspot_client_manager_summary">Список и управление устройствами подключенных к точке доступа</string>
+    <string name="wifi_hotspot_client_manager_list_only_summary">Список устройств подключенных к точке доступа</string>
+    <string name="wifi_hotspot_client_limit_title">Лимит подключенных устройств</string>
+    <string name="wifi_hotspot_blocked_clients_list_title">Заблокированные Устройства</string>
+    <string name="wifi_hotspot_connected_clients_list_title">Подключенные устройства</string>
+    <string name="wifi_hotspot_block_client_dialog_title">Заблокировать устройство</string>
+    <string name="wifi_hotspot_block_client_dialog_text">Это действие отключит \"<xliff:g id="device_name">%1$s</xliff:g>\" от этого устройства и заблокирует его</string>
+    <string name="wifi_hotspot_unblock_client_dialog_title">Разблокировать устройство</string>
+    <string name="wifi_hotspot_unblock_client_dialog_text">Устройство \"<xliff:g id="device_name">%1$s</xliff:g>\" сможет подключаться к этой точке доступа</string>
+    <string name="wifi_hotspot_client_manager_footer_text">Пока что никто не подключен к точке доступа. Подключенные и заблокированные устройства появятся здесь.</string>
 
 </resources>
