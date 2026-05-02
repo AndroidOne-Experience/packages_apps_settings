@@ -121,6 +121,10 @@
     <string name="app_display_cutout_title">Fullscreen Apps</string>
     <string name="app_display_cutout_summary">Choose which apps can extend into the notch area</string>
 
+    <!-- Per-app GPU composition -->
+    <string name="use_gpu_for_screen_composition_title">Use GPU for screen composition</string>
+    <string name="use_gpu_for_screen_composition_summary">Select apps that should disable HW overlays while in use</string>
+
     <!-- Locale Picker -->
     <string name="clear_search_query_description">Clear query</string>
     <string name="language_picker_page">Language picker page</string>

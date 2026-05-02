@@ -185,6 +185,12 @@
             settings:controller="com.android.settings.display.ScreenResolutionController"/>
 
         <Preference
+            android:key="gpu_composition_apps"
+            android:title="@string/use_gpu_for_screen_composition_title"
+            android:summary="@string/use_gpu_for_screen_composition_summary"
+            settings:controller="com.android.settings.display.GpuCompositionAppsPreferenceController" />
+
+        <Preference
             android:key="refresh_rate"
             android:title="@string/refresh_rate_title"
             android:summary="@string/summary_placeholder"

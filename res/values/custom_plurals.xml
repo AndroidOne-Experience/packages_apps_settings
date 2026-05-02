@@ -9,6 +9,13 @@
         <item quantity="other">%d apps enabled</item>
     </plurals>
 
+    <!-- Per-app GPU composition -->
+    <plurals name="gpu_composition_apps_summary">
+        <item quantity="zero">No apps selected</item>
+        <item quantity="one">%d app selected</item>
+        <item quantity="other">%d apps selected</item>
+    </plurals>
+
     <!-- Hotspot -->
     <plurals name="wifi_hotspot_client_limit_summary">
         <item quantity="other">Up to <xliff:g id="device_num">%1$d</xliff:g> devices can connect to this hotspot</item>
