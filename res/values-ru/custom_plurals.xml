@@ -4,16 +4,29 @@
 
     <!-- Notch app settings -->
     <plurals name="notch_apps_summary">
-        <item quantity="zero">Нет включенных приложений</item>
-        <item quantity="one">%d приложение включено</item>
-        <item quantity="two">%d приложения включено</item>
-        <item quantity="other">%d приложений включены</item>
-    </plurals>
+    <item quantity="zero">Нет включенных приложений.</item>
+    <item quantity="one">%d приложение включено</item>
+    <item quantity="few">%d приложения включены</item>
+    <item quantity="many">%d приложений включены</item>
+    <item quantity="other">%d приложения включены</item>
+</plurals>
+
+    <!-- Per-app GPU composition -->
+    <plurals name="gpu_composition_apps_summary">
+    <item quantity="zero">Нет выбранных приложений</item>
+    <item quantity="one">Выбрано %d приложение</item>
+    <item quantity="few">Выбрано %d приложения</item>
+    <item quantity="many">Выбрано %d приложений</item>
+    <item quantity="other">Выбрано %d приложения</item>
+</plurals>
+
 
     <!-- Hotspot -->
     <plurals name="wifi_hotspot_client_limit_summary">
-        <item quantity="other">До <xliff:g id="device_num">%1$d</xliff:g> устройств сможет подключиться к этой сети</item>
-        <item quantity="one">Всего <xliff:g id="device_num">%1$d</xliff:g> устройство сможет подключиться к этой сети</item>
-    </plurals>
+    <item quantity="one">Всего <xliff:g id="device_num">%1$d</xliff:g> устройство сможет подключиться к этой сети</item>
+    <item quantity="few">Всего <xliff:g id="device_num">%1$d</xliff:g> устройства смогут подключиться к этой сети</item>
+    <item quantity="many">Всего <xliff:g id="device_num">%1$d</xliff:g> устройств смогут подключиться к этой сети</item>
+    <item quantity="other">До <xliff:g id="device_num">%1$d</xliff:g> устройств сможет подключиться к этой сети</item>
+</plurals>
 
 </resources>
