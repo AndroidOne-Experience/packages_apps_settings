@@ -8,7 +8,7 @@
       other   {Вы в # шагах от включения параметров разработчика.}
     }</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Confirmation that developer settings are enabled -->
-    <string name="show_dev_on_cm">Вы включили параметры разработчика!</string>
+    <string name="show_dev_on_cm">Вы включили параметры линус-разработчика!</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Okay we get it, stop pressing, you already have it on -->
     <string name="show_dev_already_cm">Нет необходимости, параметры разработчика уже включены.</string>
 
@@ -35,7 +35,7 @@
     <string name="fingerprint_enroll_touch_dialog_message_side" product="default">Коснитесь датчика на боковой стороне вашего телефона.</string>
 
     <!-- Warning message for the sd card setup -->
-    <string name="storage_warning_internal">Внимание: этот параметр может работать некорректно или привести к потере данных, поэтому не рекомендуется его включать!</string>
+    <string name="storage_warning_internal">Внимание: этот параметр может работать некорректно или привести к течке данных, поэтому включать его не рекомендуется!</string>
 
     <!-- Location settings screen, setting check box label if Assisted GPS should be enabled -->
     <string name="assisted_gps">Использовать A-GPS</string>
@@ -90,11 +90,11 @@
     <!-- Ambient wake toggles -->
     <string name="doze_gesture_ambient_title">Окружающий Дисплей</string>
     <string name="doze_gesture_ambient_summary">Показывать окружающий дисплей вместо полного включения экрана</string>
-    <string name="gesture_wake_ambient">Показать Окружающее(чебля)</string>
+    <string name="gesture_wake_ambient">Показать окражающий дисплей</string>
     <string name="gesture_wake">Полностью включить</string>
 
     <!-- Doze enablement -->
-    <string name="doze_enabled_title">Окружающий дисплей</string>
+    <string name="doze_enabled_title">Ambient Display</string>
     <string name="doze_enabled_summary">Включает функциональность "дозы"</string>
 
     <!-- Status bar Icon Manager -->
@@ -103,11 +103,11 @@
 
     <!-- Keybox Data -->
     <string name="keybox_data_title">Выбрать keybox XML для подмены</string>
-    <string name="keybox_data_summary">Выберите keybox XML для системной подмены ключа аттестации. Нажмите удалить для сброса данных keybox. Хотя я советую быть как боб</string>
+    <string name="keybox_data_summary">Выберите keybox XML для системной подмены ключа аттестации. Нажмите удалить для сброса данных keybox. Хотя, я советую быть как боб.</string>
 
     <!-- Pif Data -->
     <string name="pif_data_title">Выбрать PIF jSON для подмены</string>
-    <string name="pif_data_summary">Выберите PIF jSON для подмены пропов аттестации для GMS и Play Market. Нажмите удалить, чтобы сбросить и использовать динамические значения по умолчанию.</string>
+    <string name="pif_data_summary">Выберите PIF jSON для подмены пропов аттестации для GMS и Play Market. Нажмите на иконку корзины, чтобы сбросить текущий jSON и использовать динамические значения по умолчанию.</string>
 
     <!-- Global Actions -->
     <string name="global_actions_advanced_reboot_title">Расширенная перезагрузка</string>
@@ -120,6 +120,10 @@
     <!-- Notch Apps Settings -->
     <string name="app_display_cutout_title">Полноэкранные приложения</string>
     <string name="app_display_cutout_summary">Выберите, какие приложения могут использовать область выреза</string>
+
+    <!-- Per-app GPU composition -->
+    <string name="use_gpu_for_screen_composition_title">Использовать GPU для композиции экрана</string>
+    <string name="use_gpu_for_screen_composition_summary">Выберите приложения, для которых аппаратные наложения будут отключены во время их работы</string>
 
     <!-- Locale Picker -->
     <string name="clear_search_query_description">Очистить запрос</string>
@@ -172,7 +176,7 @@
 
     <!-- Hide screen capture & Ignore secure window status -->
     <string name="screen_capture_controls_title">Управление скриншотами</string>
-    <string name="screen_capture_controls_summary">Включив эту настройку, в защищенных приложениях и системе будет отключено ограничение на создание скриншотов там, где это запрещено. Может привести к течке данных</string>
+    <string name="screen_capture_controls_summary">Включив эту настройку, в защищенных приложениях и системе будет отключено ограничение на создание скриншотов там, где это запрещено. Может привести к течке данных.</string>
 
     <!-- Force LTE_CA -->
     <string name="force_lte_ca_title">Агрегация частот</string>
