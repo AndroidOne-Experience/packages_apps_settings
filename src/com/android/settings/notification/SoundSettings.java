@@ -43,7 +43,6 @@ import com.android.settings.sound.HandsFreeProfileOutputPreferenceController;
 import com.android.settings.sound.SliderVolumizer;
 import com.android.settings.sound.VolumeSliderPreference;
 import com.android.settings.widget.PreferenceCategoryController;
-import com.android.settingslib.drawer.Tile;
 import com.android.settings.widget.UpdatableListPreferenceDialogFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.Instrumentable;
@@ -176,11 +175,6 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
     @Override
     protected String getLogTag() {
         return TAG;
-    }
-
-    @Override
-    protected boolean displayTile(Tile tile) {
-        return super.displayTile(tile) && !DolbyTileUtils.isDolbyTile(tile);
     }
 
     @Override
