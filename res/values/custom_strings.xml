@@ -168,10 +168,6 @@
     <!-- Quad9 Unsecured ECS DNS hostname -->
     <string name="private_dns_hostname_quad9_unsecured_ecs" translatable="false">dns12.quad9.net</string>
 
-    <!-- Hide developer status -->
-    <string name="hide_developer_status_title">Hide developer status</string>
-    <string name="hide_developer_status_summary">Hide developer status from apps</string>
-
     <!-- Hide screen capture & Ignore secure window status -->
     <string name="screen_capture_controls_title">Screen capture controls</string>
     <string name="screen_capture_controls_summary">Manage how screenshots work. You can hide capture status and allow screenshots in protected apps. In some cases, this may lead to privacy leaks.</string>
