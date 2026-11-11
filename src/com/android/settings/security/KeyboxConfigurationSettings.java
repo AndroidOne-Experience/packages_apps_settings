@@ -443,9 +443,21 @@ public class KeyboxConfigurationSettings extends InstrumentedFragment {
     }
 
     private void handleFileSelected(Uri uri) {
-        if (uri == null ||
-            (!uri.toString().endsWith(".xml") &&
-             !"text/xml".equals(requireContext().getContentResolver().getType(uri)))) {
+        if (uri == null) {
+            Toast.makeText(requireContext(), R.string.keybox_invalid_file, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String mimeType = requireContext().getContentResolver().getType(uri);
+        String uriStr = uri.toString().toLowerCase();
+        boolean isXml = uriStr.endsWith(".xml")
+                || uriStr.contains(".xml")
+                || "text/xml".equalsIgnoreCase(mimeType)
+                || "application/xml".equalsIgnoreCase(mimeType)
+                || "text/plain".equalsIgnoreCase(mimeType)
+                || "application/octet-stream".equalsIgnoreCase(mimeType);
+
+        if (!isXml) {
             Toast.makeText(requireContext(), R.string.keybox_invalid_file, Toast.LENGTH_SHORT).show();
             return;
         }

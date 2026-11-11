@@ -68,9 +68,21 @@ public class KeyboxDataPreference extends Preference {
     }
 
     public void handleFileSelected(Uri uri) {
-        if (uri == null ||
-            (!uri.toString().endsWith(".xml") &&
-             !"text/xml".equals(getContext().getContentResolver().getType(uri)))) {
+        if (uri == null) {
+            Toast.makeText(getContext(), "Invalid file selected", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String mimeType = getContext().getContentResolver().getType(uri);
+        String uriStr = uri.toString().toLowerCase();
+        boolean isXml = uriStr.endsWith(".xml")
+                || uriStr.contains(".xml")
+                || "text/xml".equalsIgnoreCase(mimeType)
+                || "application/xml".equalsIgnoreCase(mimeType)
+                || "text/plain".equalsIgnoreCase(mimeType)
+                || "application/octet-stream".equalsIgnoreCase(mimeType);
+
+        if (!isXml) {
             Toast.makeText(getContext(), "Invalid file selected", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -178,7 +190,7 @@ public class KeyboxDataPreference extends Preference {
         }
 
         return numberOfKeyboxes == 1
-                && hasEcdsaKey && hasEcdsaPrivKey && ecdsaCertCount >= 1
-                && hasRsaKey && hasRsaPrivKey && rsaCertCount >= 1;
+                && ((hasEcdsaKey && hasEcdsaPrivKey && ecdsaCertCount >= 1)
+                || (hasRsaKey && hasRsaPrivKey && rsaCertCount >= 1));
     }
 }
