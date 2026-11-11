@@ -16,7 +16,6 @@
 
 package com.android.settings.safetycenter;
 
-import com.android.settings.security.KeyboxDataPreference;
 import com.android.settings.security.PifDataPreference;
 
 import android.app.Activity;
@@ -59,11 +58,6 @@ public class MoreSecurityPrivacyFragment extends DashboardFragment {
     private static final String KEY_NOTIFICATION_WORK_PROFILE_NOTIFICATIONS =
             "privacy_lock_screen_work_profile_notifications";
 
-    // Keybox preference integration
-    private static final String KEYBOX_DATA_KEY = "keybox_data_setting";
-    private ActivityResultLauncher<Intent> mKeyboxFilePickerLauncher;
-    private KeyboxDataPreference mKeyboxDataPreference;
-
     // Pif preference integration
     private static final String PIF_DATA_KEY = "pif_data_setting";
     private ActivityResultLauncher<Intent> mPifFilePickerLauncher;
@@ -95,20 +89,6 @@ public class MoreSecurityPrivacyFragment extends DashboardFragment {
         SafetyCenterUtils.replaceEnterpriseStringsForPrivacyEntries(this);
         SafetyCenterUtils.replaceEnterpriseStringsForSecurityEntries(this);
 
-        // Setup Keybox file picker
-        mKeyboxFilePickerLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-                        Uri uri = result.getData().getData();
-                        Preference pref = findPreference(KEYBOX_DATA_KEY);
-                        if (pref instanceof KeyboxDataPreference) {
-                            ((KeyboxDataPreference) pref).handleFileSelected(uri);
-                        }
-                    }
-                }
-        );
-
         // Setup Pif file picker
         mPifFilePickerLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -128,12 +108,8 @@ public class MoreSecurityPrivacyFragment extends DashboardFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Connect Keybox preference to launcher
-        mKeyboxDataPreference = findPreference(KEYBOX_DATA_KEY);
+        // Connect Pif preference to launcher
         mPifDataPreference = findPreference(PIF_DATA_KEY);
-        if (mKeyboxDataPreference != null) {
-            mKeyboxDataPreference.setFilePickerLauncher(mKeyboxFilePickerLauncher);
-        }
         if (mPifDataPreference != null) {
             mPifDataPreference.setFilePickerLauncher(mPifFilePickerLauncher);
         }

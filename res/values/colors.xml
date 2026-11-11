@@ -298,4 +298,21 @@
 
    <color name="primary_text_disable_only_material_light">@*android:color/primary_text_disable_only_material_light</color>
 
+    <!-- Keybox Theme Adaptive Colors (Light Mode) -->
+    <color name="keybox_card_bg_color">#F8F9FA</color>
+    <color name="keybox_card_stroke_color">#E0E3E7</color>
+    <color name="keybox_badge_active_bg_color">#E6F4EA</color>
+    <color name="keybox_badge_active_text_color">#137333</color>
+    <color name="keybox_badge_inactive_bg_color">#FCE8E6</color>
+    <color name="keybox_badge_inactive_text_color">#C5221F</color>
+    <color name="keybox_btn_stroke_color">#1F1F1F</color>
+    <color name="keybox_btn_text_color">#1F1F1F</color>
+    <color name="keybox_tab_container_bg_color">#E9EEF6</color>
+    <color name="keybox_tab_selected_bg_color">#0B57D0</color>
+    <color name="keybox_tab_selected_text_color">#FFFFFF</color>
+    <color name="keybox_tab_unselected_text_color">#444746</color>
+    <color name="keybox_search_bar_bg_color">#E9EEF6</color>
+    <color name="keybox_search_text_color">#1F1F1F</color>
+    <color name="keybox_search_hint_color">#747775</color>
+
 </resources>

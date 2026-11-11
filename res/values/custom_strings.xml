@@ -101,9 +101,45 @@
     <string name="icon_manager_title">Icon manager</string>
     <string name="icon_manager_summary">Control visibility of status bar icons</string>
 
-    <!-- Keybox Data -->
-    <string name="keybox_data_title">Select keybox XML to spoof</string>
-    <string name="keybox_data_summary">Select the keybox XML used for system-wide key attestation spoofing. Click delete to reset keybox data.</string>
+    <!-- Keybox Configuration -->
+    <string name="keybox_configuration_title">Keybox configuration</string>
+    <string name="keybox_configuration_summary">Manage imported keybox and app selection</string>
+    <string name="keybox_configuration_summary_imported">Keybox imported • %1$d apps selected</string>
+    <string name="keybox_configuration_summary_imported_no_apps">Keybox imported • No apps selected</string>
+    <string name="keybox_configuration_summary_not_imported">No keybox imported</string>
+
+    <string name="keybox_file_title">Keybox XML</string>
+    <string name="keybox_status_imported">Keybox imported</string>
+    <string name="keybox_status_not_imported">No keybox imported</string>
+    <string name="keybox_status_active">Active</string>
+    <string name="keybox_status_inactive">Inactive</string>
+    <string name="keybox_imported_file_name">Imported keybox.xml</string>
+    <string name="keybox_import_action">Import keybox</string>
+    <string name="keybox_replace_action">Replace keybox</string>
+    <string name="keybox_remove_action">Remove keybox</string>
+    <string name="keybox_remove_short_action">Remove</string>
+    <string name="keybox_apps_section_title">Per-app configuration</string>
+    <string name="keybox_apps_section_subtitle">Select target applications for keybox attestation.</string>
+    <string name="keybox_apps_disabled_hint">Import a keybox XML above to manage target applications.</string>
+    <string name="keybox_remove_dialog_title">Remove keybox?</string>
+    <string name="keybox_remove_dialog_message">Are you sure you want to remove the imported keybox XML? Keybox attestation will be disabled.</string>
+    <string name="keybox_file_loaded">XML file loaded</string>
+    <string name="keybox_file_cleared">XML data cleared</string>
+    <string name="keybox_invalid_file">Invalid file selected</string>
+    <string name="keybox_invalid_xml">Invalid XML: missing required data</string>
+    <string name="keybox_read_error">Failed to read XML</string>
+
+    <string name="keybox_packages_user_apps">User apps</string>
+    <string name="keybox_packages_system_apps">System apps</string>
+    <string name="keybox_packages_selected_apps">Selected</string>
+    <string name="keybox_packages_user_apps_count">User (%1$d)</string>
+    <string name="keybox_packages_system_apps_count">System (%1$d)</string>
+    <string name="keybox_packages_selected_apps_count">Selected (%1$d)</string>
+    <string name="keybox_packages_no_apps">No apps found</string>
+    <string name="keybox_packages_search">Search apps&#8230;</string>
+    <string name="keybox_search_placeholder">Search applications&#8230;</string>
+    <string name="keybox_packages_select_all">Select all</string>
+    <string name="keybox_packages_deselect_all">Deselect all</string>
 
     <!-- Pif Data -->
     <string name="pif_data_title">Select PIF JSON to spoof</string>

@@ -197,12 +197,13 @@
 
     </Preference>
 
-    <com.android.settings.security.KeyboxDataPreference
+    <Preference
         android:order="253"
-        android:key="keybox_data_setting"
-        android:title="@string/keybox_data_title"
-        android:summary="@string/keybox_data_summary"
-        android:defaultValue=""/>
+        android:key="keybox_configuration_settings"
+        android:title="@string/keybox_configuration_title"
+        android:summary="@string/keybox_configuration_summary"
+        android:fragment="com.android.settings.security.KeyboxConfigurationSettings"
+        settings:controller="com.android.settings.security.KeyboxConfigurationPreferenceController" />
 
     <com.android.settings.security.PifDataPreference
         android:order="254"

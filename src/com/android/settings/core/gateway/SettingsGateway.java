@@ -197,6 +197,7 @@ import com.android.settings.regionalpreferences.TemperatureUnitFragment;
 import com.android.settings.safetycenter.MoreSecurityPrivacyFragment;
 import com.android.settings.safetycenter.ui.SafetyCenterFragment;
 import com.android.settings.security.ContentProtectionPreferenceFragment;
+import com.android.settings.security.KeyboxConfigurationSettings;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.MemtagPage;
 import com.android.settings.security.SecurityAdvancedSettings;
@@ -439,6 +440,7 @@ public class SettingsGateway {
             SummarizationPreferenceFragment.class.getName(),
             SafetyCenterFragment.class.getName(),
             WifiTetherClientManager.class.getName(),
+            KeyboxConfigurationSettings.class.getName(),
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
