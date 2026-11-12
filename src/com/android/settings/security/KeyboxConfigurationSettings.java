@@ -435,6 +435,7 @@ public class KeyboxConfigurationSettings extends InstrumentedFragment {
                 .setPositiveButton(R.string.keybox_remove_action, (dialog, which) -> {
                     Settings.Secure.putString(requireContext().getContentResolver(),
                             Settings.Secure.KEYBOX_DATA, null);
+                    killPackages();
                     Toast.makeText(requireContext(), R.string.keybox_file_cleared, Toast.LENGTH_SHORT).show();
                     updateKeyboxState();
                 })
@@ -479,6 +480,7 @@ public class KeyboxConfigurationSettings extends InstrumentedFragment {
 
             Settings.Secure.putString(requireContext().getContentResolver(),
                     Settings.Secure.KEYBOX_DATA, xml);
+            killPackages();
             Toast.makeText(requireContext(), R.string.keybox_file_loaded, Toast.LENGTH_SHORT).show();
             updateKeyboxState();
 
@@ -623,6 +625,11 @@ public class KeyboxConfigurationSettings extends InstrumentedFragment {
                 mAllApps = allApps;
                 mSelectedPackages.clear();
                 mSelectedPackages.addAll(KeyboxPackagesUtils.getPackages(requireContext()));
+                if (mSelectedPackages.remove("com.google.android.gms.unstable")) {
+                    for (UserInfo info : mUserInfos) {
+                        KeyboxPackagesUtils.removePackage(requireContext(), "com.google.android.gms.unstable", info.id);
+                    }
+                }
                 if (mLoadingProgress != null) {
                     mLoadingProgress.setVisibility(View.GONE);
                 }
@@ -681,7 +688,20 @@ public class KeyboxConfigurationSettings extends InstrumentedFragment {
                 KeyboxPackagesUtils.addPackage(ctx, pkg, info.id);
             } else {
                 KeyboxPackagesUtils.removePackage(ctx, pkg, info.id);
+                if ("com.google.android.gms".equals(pkg)) {
+                    KeyboxPackagesUtils.removePackage(ctx, "com.google.android.gms.unstable", info.id);
+                }
             }
+        }
+
+        if ("com.google.android.gms".equals(pkg) || "com.android.vending".equals(pkg)) {
+            killPackages();
+        } else {
+            try {
+                if (mActivityManager != null) {
+                    mActivityManager.forceStopPackage(pkg);
+                }
+            } catch (Exception ignored) {}
         }
 
         updateAppCounts();
@@ -689,6 +709,17 @@ public class KeyboxConfigurationSettings extends InstrumentedFragment {
             filterAndSubmitList();
         } else {
             mAdapter.notifyItemChanged(position);
+        }
+    }
+
+    private void killPackages() {
+        try {
+            if (mActivityManager != null) {
+                mActivityManager.forceStopPackage("com.google.android.gms");
+                mActivityManager.forceStopPackage("com.android.vending");
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to force stop packages", e);
         }
     }
 
